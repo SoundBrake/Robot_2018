@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -21,9 +22,13 @@ public class Lift extends Subsystem {
 	private static final double ENCODER_COUNT_TO_INCH = 0;
 		
 	private DoubleSolenoid collapse;
-	private WPI_TalonSRX talonLift;
-	private TalonSRX talonPhoenixLift;
-		
+	public static WPI_TalonSRX talonLift;
+	public static TalonSRX talonPhoenixLift;
+	
+//	private Encoder liftEncoder;
+	
+	
+	
 	public Lift() {
 		super();
 		talonLift = new WPI_TalonSRX(LIFT_MOTOR);
@@ -36,6 +41,8 @@ public class Lift extends Subsystem {
 	 * 
 	 * @param position to go to
 	 */
+	public static Encoder liftEncoder  = new Encoder(10, 11, false, Encoder.EncodingType.k4X);
+
 	public void setLiftPositon(POSITION position) {
 		//Maybe set a variable here and have a command running to go to whichever position is set?
 	}
