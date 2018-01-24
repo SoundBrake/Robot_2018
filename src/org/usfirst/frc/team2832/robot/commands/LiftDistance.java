@@ -27,31 +27,31 @@ public class LiftDistance extends Command {
 		currentPos = Lift.liftEncoder.getRaw();
 
 		if(Robot.controls.getButtonPressed(Controls.Controllers.CONTROLLER_MAIN, Controls.Buttons.X)) {//Change button (D-pad?)
-		
 			if(currentPos < heightScale) {
-				Lift.talonLift.set(0.2);
+				while(currentPos < heightScale) {
+					Lift.talonLift.set(0.1);
+				}
 			}
-			else if(currentPos >= heightScale) {
-				Lift.talonLift.set(0.0);
+			else if(currentPos > heightScale) {
+				while(currentPos > heightScale) {
+					Lift.talonLift.set(-0.1);
+				}
 			}
+			
 		}
 		if(Robot.controls.getButtonPressed(Controls.Controllers.CONTROLLER_MAIN, Controls.Buttons.A)) {
-			if(currentPos < heightSwitch) {		//Change to a range
-				Lift.talonLift.set(0.2);
+			if(currentPos < heightSwitch) {
+				while(currentPos < heightSwitch) {
+					Lift.talonLift.set(0.2);
+				}
 			}
-			else if(currentPos == heightSwitch) {	//Change to a range, say height +3in
-				Lift.talonLift.set(0.0);
-			}
-			else if(currentPos > heightSwitch) {	//Also should be a range
-				Lift.talonLift.set(-0.1);
-			}
+			
 		}
 		if(Robot.controls.getButtonPressed(Controls.Controllers.CONTROLLER_MAIN, Controls.Buttons.B)) {
 			if(currentPos > heightIntake) {
-				Lift.talonLift.set(-0.1);
-			}
-			else if(currentPos == heightIntake) {
-				Lift.talonLift.set(0.0);
+				while(currentPos > heightIntake) {
+					Lift.talonLift.set(0.1);
+				}
 			}
 		}
 	}
