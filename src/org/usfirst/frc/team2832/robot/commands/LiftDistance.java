@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2832.robot.commands;
 
-import org.usfirst.frc.team2832.robot.Controls;
+import org.usfirst.frc.team2832.robot.Controls.Controllers;
 import org.usfirst.frc.team2832.robot.Robot;
 import org.usfirst.frc.team2832.robot.subsystems.Lift;
 
@@ -26,7 +26,7 @@ public class LiftDistance extends Command {
 	protected void execute() {
 		currentPos = Lift.liftEncoder.getRaw();
 
-		if(Robot.controls.getButtonPressed(Controls.Controllers.CONTROLLER_MAIN, Controls.Buttons.X)) {//Change button (D-pad?)
+		if(Robot.controls.getPOV(Controllers.CONTROLLER_MAIN) == 90) { //D-Pad down (maybe)
 			if(currentPos < heightScale) {
 				while(currentPos < heightScale) {
 					Lift.talonLift.set(0.1);
@@ -39,7 +39,7 @@ public class LiftDistance extends Command {
 			}
 			
 		}
-		if(Robot.controls.getButtonPressed(Controls.Controllers.CONTROLLER_MAIN, Controls.Buttons.A)) {
+		if(Robot.controls.getPOV(Controllers.CONTROLLER_MAIN) == 180) { //D-pad left (hopefully)
 			if(currentPos < heightSwitch) {
 				while(currentPos < heightSwitch) {
 					Lift.talonLift.set(0.2);
@@ -47,7 +47,7 @@ public class LiftDistance extends Command {
 			}
 			
 		}
-		if(Robot.controls.getButtonPressed(Controls.Controllers.CONTROLLER_MAIN, Controls.Buttons.B)) {
+		if(Robot.controls.getPOV(Controllers.CONTROLLER_MAIN) == 270) { //D-Pad up (at least, it should be)
 			if(currentPos > heightIntake) {
 				while(currentPos > heightIntake) {
 					Lift.talonLift.set(0.1);
