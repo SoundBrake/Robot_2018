@@ -49,6 +49,7 @@ public class DriveTrain extends Subsystem {
 	private I2C i2cColorSensor;
 	private byte[] colorSensorResults;
 	private byte[] toSendColorSensor;
+	private static int color;
 		
 	public DriveTrain() {
 		super();
@@ -73,6 +74,7 @@ public class DriveTrain extends Subsystem {
 		colorSensorResults = new byte[1];
 		toSendColorSensor = new byte[1];
 		toSendColorSensor[0]=(byte)-1;
+		color = 0;
 	}
 	
 	/**
@@ -209,6 +211,9 @@ public class DriveTrain extends Subsystem {
     }
     
     public String readColorSensor() {
+    	if(!i2cColorSensor.read(0, 1, colorSensorResults)) {
+    		color = colorSensorResults[0]&0xFF;
+    	}
     	i2cColorSensor.read(0, 1, colorSensorResults);
     	if(colorSensorResults[0]==(byte)0) {
     		return "not white/black";
